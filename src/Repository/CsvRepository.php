@@ -6,10 +6,6 @@ use App\Entity\CsvEntity;
 
 class CsvRepository
 {
-    /**
-     * @param string $csvFile
-     * @return CsvEntity|null
-     */
     public function getCsvContent(string $csvFile): ?CsvEntity
     {
         if (!file_exists($csvFile) || !is_readable($csvFile)) {

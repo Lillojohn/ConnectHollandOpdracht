@@ -4,20 +4,41 @@ namespace App\Entity;
 
 class CsvEntity
 {
+    /**
+     * @var string[]
+     */
     private array $header;
+
+    /**
+     * @var string[][]
+     */
     private array $rows;
 
-    public function __construct($header, $rows)
+    /**
+     * CsvEntity constructor.
+     *
+     * @param string[]   $header
+     * @param string[][] $rows
+     */
+    public function __construct(array $header, array $rows)
     {
         $this->header = $header;
         $this->rows = $rows;
     }
 
-    public function getHeader(){
+    /**
+     * @return array|string[]
+     */
+    public function getHeader(): array
+    {
         return $this->header;
     }
 
-    public function getRows(){
+    /**
+     * @return array|string[][]
+     */
+    public function getRows(): array
+    {
         return $this->rows;
     }
 }
