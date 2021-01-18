@@ -2,15 +2,18 @@
 
 namespace App\Repository;
 
+use App\Entity\CsvEntity;
+
 class CsvRepository
 {
     /**
-     * @return string[][]
+     * @param string $csvFile
+     * @return CsvEntity|null
      */
-    public function getCsvContent(string $csvFile): array
+    public function getCsvContent(string $csvFile): ?CsvEntity
     {
         if (!file_exists($csvFile) || !is_readable($csvFile)) {
-            return [];
+            return null;
         }
 
         $csvContent = array_map('str_getcsv', file($csvFile));
@@ -19,6 +22,6 @@ class CsvRepository
             $csvContent[$key] = explode(';', $row[0]);
         }
 
-        return $csvContent;
+        return new CsvEntity($csvContent[0], array_splice($csvContent, 1));
     }
 }

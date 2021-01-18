@@ -35,7 +35,7 @@ class CsvToConsoleCommand extends Command
     {
         $csvFile = sprintf('csv/%s', $input->getOption('file'));
         $csvContent = $this->csvRepository->getCsvContent($csvFile);
-        if (true === empty($csvContent)) {
+            if ($csvContent === null) {
             $output->writeln('File does not exist.');
 
             return Command::FAILURE;
@@ -43,8 +43,8 @@ class CsvToConsoleCommand extends Command
 
         $table = new Table($output);
         $table
-            ->setHeaders($csvContent[0])
-            ->setRows(array_splice($csvContent, 1))
+            ->setHeaders($csvContent->getHeader())
+            ->setRows($csvContent->getRows())
         ;
         $table->render();
 
